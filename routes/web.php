@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/listarDocumentos', 'CobranzaController@verDocumentos');
+Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard');
