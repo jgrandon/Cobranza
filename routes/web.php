@@ -10,10 +10,19 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//
+// Route::get('/', function () {
+//     return redirect(route('web'));
+// });
+//
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::get('/web', function(){
+  return view('web.main2');
 });
 
 Route::get('/listarDocumentos', 'CobranzaController@verDocumentos');
 Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard');
+Route::get('/empresas', 'EmpresasController@listarEmpresas')->name('empresas');
+Route::get('/empresas/agregar', 'EmpresasController@agregarEmpresa')->name('agregarEmpresa');
+Route::post('/empresas/agregar', 'EmpresasController@agregarEmpresa')->name('agregarEmpresa');

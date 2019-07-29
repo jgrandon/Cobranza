@@ -22,6 +22,13 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        Schema::create('users_tipos', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('nombre');
+        });
+
+
     }
 
     /**
@@ -31,6 +38,8 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+
         Schema::dropIfExists('users');
+        Schema::dropIfExists('users_tipos');
     }
 }
