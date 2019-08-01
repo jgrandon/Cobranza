@@ -14,17 +14,11 @@ class CreateEmpresasTable extends Migration
     public function up()
     {
 
-        Schema::create('giros', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('nombre');
-        });
-
         Schema::create('empresas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('rut');
             $table->string('razonSocial');
-            $table->unsignedBigInteger('idGiro');
-            $table->foreign('idGiro')->references('id')->on('giros');
+            $table->string('paginaWeb');
             $table->timestamps();
         });
 
@@ -42,9 +36,6 @@ class CreateEmpresasTable extends Migration
             $table->foreign('idEmpresa')->references('id')->on('empresas');
         });
 
-
-
-
     }
 
     /**
@@ -57,6 +48,5 @@ class CreateEmpresasTable extends Migration
       Schema::dropIfExists('direcciones');
       Schema::dropIfExists('comunas');
       Schema::dropIfExists('empresas');
-      Schema::dropIfExists('giros');
     }
 }

@@ -11,11 +11,11 @@
   </tbody>
 </table>
 <script type="text/javascript">
-  // window.onload = function(){
-  //   dataTable = $("#{{ $id }}").DataTable({
-  //     "language": {
-  //         "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
-  //       }
-  //   });
-  // };
+  window.onload = function(){
+    dataTable = $("#{{ $id }}").DataTable({
+      "language": {
+          "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+        }
+    });
+  };
 </script>

@@ -23,6 +23,7 @@ Route::get('/web', function(){
 
 Route::get('/listarDocumentos', 'CobranzaController@verDocumentos');
 Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard');
+Route::get('/documentos', 'DocumentoController@verDocumentos')->name('documentos');
 Route::get('/empresas', 'EmpresasController@listarEmpresas')->name('empresas');
 Route::get('/empresas/agregar', 'EmpresasController@agregarEmpresa')->name('agregarEmpresa');
 Route::post('/empresas/agregar', 'EmpresasController@agregarEmpresa')->name('agregarEmpresa');

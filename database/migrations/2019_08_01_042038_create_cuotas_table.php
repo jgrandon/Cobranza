@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCobranzasTable extends Migration
+class CreateCuotasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateCobranzasTable extends Migration
      */
     public function up()
     {
-        Schema::create('cobranzas', function (Blueprint $table) {
+        Schema::create('cuotas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('idEstado');
-            $table->string('observacion');
             $table->unsignedBigInteger('idDocumento');
-            $table->foreign('idCuota')->references('id')->on('cuotas');
-            $table->foreign('idEstado')->references('id')->on('estadosCobranza');
+            $table->timestamp('fechaVencimiento');
+            $table->integer('monto');
+            $table->boolean('conciliado')->default(false);
+            $table->boolean('facturado')->default(false);
+            $table->foreign('idDocumento')->references('id')->on('documentos');
             $table->timestamps();
         });
     }
@@ -31,7 +32,6 @@ class CreateCobranzasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cobranzas');
-        Schema::dropIfExists('estadosCobranza');
+        Schema::dropIfExists('cuotas');
     }
 }

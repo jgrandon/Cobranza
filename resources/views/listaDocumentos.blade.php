@@ -3,19 +3,26 @@
 @section('contenido')
 
   @component('layout.table')
-    @slot('id','dt-cobranza')
-    @slot('headers',['Estado','Fecha Documento','Documento','Cliente'])
+    @slot('id','dt-documentos')
+    @slot('headers',['Estado','Deudor','Documento','Fecha Emision','Fecha Vencimiento','Monto'])
     @section('body')
-      @foreach ($cobranzas as $c => $c)
+      @foreach ($documentos as $c => $d)
         <tr>
-          <td>{{ $c->estado }}</td>
-          <td>{{ $c->documento->tipo }} - {{ $c->documento->folio }}</td>
-          <td>{{ $c->documento->fecha }}</td>
-          <td>{{ $c->cliente->nombre }}</td>
+          <td>
+            {{ $d->estado() }}
+          </td>
+          <td>{{ $d->deudor()->razonSocial }}</td>
+          <td>{{ $d->tipo }} - {{ $d->folio }}</td>
+          <!--
+          <td>{{ $d->fechaEmision->format('Y-m-d') }}</td>
+          <td>{{ $d->fechaVencimiento->format('Y-m-d') }}</td>
+        -->
+          <td>$ {{ number_format($d->monto,0,',','.') }}</td>
         </tr>
-
       @endforeach
     @endsection
   @endcomponent
-  @parent
+
+  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#md-agregar" name="button">Agregar Documentos</button>
+
 @endsection
