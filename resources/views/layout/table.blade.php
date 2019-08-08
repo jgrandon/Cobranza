@@ -13,9 +13,10 @@
 <script type="text/javascript">
   window.onload = function(){
     dataTable = $("#{{ $id }}").DataTable({
-      "language": {
+      language: {
           "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
         }
+      , columnDefs : [@yield('columnDefs')]
     });
   };
 </script>

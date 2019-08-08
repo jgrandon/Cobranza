@@ -11,13 +11,13 @@ class Documento extends Model
 
 
     public function estado(){
-        $cobranzas = Cobranza::where( 'idDocumento', $this->id )->get();
-        // return "<pre>".var_dump($cobranzas)."</pre>";
-        if( count($cobranzas)>0 ){
-          return 'En Proceso';
-        }else{
-          return 'Pendiente';
-        }
+        // $cobranzas = Cobranza::where( 'idDocumento', $this->id )->get();
+        // // return "<pre>".var_dump($cobranzas)."</pre>";
+        // if( count($cobranzas)>0 ){
+        //   return 'En Proceso';
+        // }else{
+        // }
+        return 'Pendiente';
     }
 
 

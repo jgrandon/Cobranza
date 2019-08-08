@@ -13,16 +13,17 @@
           </td>
           <td>{{ $d->deudor()->razonSocial }}</td>
           <td>{{ $d->tipo }} - {{ $d->folio }}</td>
-          <!--
           <td>{{ $d->fechaEmision->format('Y-m-d') }}</td>
           <td>{{ $d->fechaVencimiento->format('Y-m-d') }}</td>
-        -->
           <td>$ {{ number_format($d->monto,0,',','.') }}</td>
         </tr>
       @endforeach
     @endsection
   @endcomponent
-
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#md-agregar" name="button">Agregar Documentos</button>
-
+  <a class="btn btn-success" href="{{ route('agregarDocumento') }}">Agregarrr Documento</a>
+<!--
+<form class="" action="{{ route('agregarDocumento') }}" method="post">
+  <button type="success" class="btn btn-success" data-toggle="modal" data-target="#md-agregar" name="button">Agregar Documentos</button>
+</form>
+-->
 @endsection

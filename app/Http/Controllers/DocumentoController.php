@@ -8,6 +8,10 @@ use App;
 
 class DocumentoController extends Controller
 {
+
+
+
+
     public function verDocumentos(){
         $user = Auth::user();
         $documentos = App\Documento::all();
@@ -18,12 +22,23 @@ class DocumentoController extends Controller
         // }
     }
 
-    public function agregarDocumento(Request $request){
-        if(){
 
-        }
-        $d = new Documento();
-
-
+    public function verAgregarDocumento(){
+        $etapa = 1;
+        return view('crearDocumento',compact('etapa'));
     }
+
+    public function validarFormlarioDocumento(Request $request){
+      if( $request->etapa == 1){
+
+      }
+    }
+
+
+    // public function agregarDocumento(Request $request){
+    //     if(){
+    //
+    //     }
+    //     $d = new Documento();
+    // }
 }
