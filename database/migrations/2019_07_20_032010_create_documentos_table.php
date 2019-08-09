@@ -20,7 +20,7 @@ class CreateDocumentosTable extends Migration
             $table->timestamp('fechaEmision')->default(null)->nullable();
             $table->timestamp('fechaVencimiento')->default(null)->nullable();
             $table->integer('monto');
-            $table->boolean('solicitarPdf');
+            $table->boolean('solicitarPdf')->default(null)->nullable();
             $table->unsignedBigInteger('idAcreedor');
             $table->unsignedBigInteger('idDeudor');
             $table->foreign('idAcreedor')->references('id')->on('empresas');

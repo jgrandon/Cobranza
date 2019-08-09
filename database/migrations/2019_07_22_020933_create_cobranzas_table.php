@@ -13,15 +13,22 @@ class CreateCobranzasTable extends Migration
      */
     public function up()
     {
+        Schema::create('estadosCobranza', function (Blueprint $table) {
+          $table->bigIncrements('id');
+          $table->string('nombre');
+          $table->timestamps();
+        });
+
         Schema::create('cobranzas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('idCuota');
             $table->unsignedBigInteger('idEstado');
             $table->string('observacion');
-            $table->unsignedBigInteger('idDocumento');
             $table->foreign('idCuota')->references('id')->on('cuotas');
             $table->foreign('idEstado')->references('id')->on('estadosCobranza');
             $table->timestamps();
         });
+
     }
 
     /**
