@@ -21,10 +21,12 @@ Route::get('/web', function(){
   return view('web.main2');
 });
 
-Route::get('/listarDocumentos', 'CobranzaController@verDocumentos');
+Route::get('/deudores', 'CobranzaController@verDeudores');
 Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard');
 Route::get('/documentos', 'DocumentoController@verDocumentos')->name('documentos');
 Route::get('/documentos:agregar','DocumentoController@verAgregarDocumento')->name('agregarDocumento');
 Route::get('/empresas', 'EmpresasController@listarEmpresas')->name('empresas');
 Route::get('/empresas/agregar', 'EmpresasController@agregarEmpresa')->name('agregarEmpresa');
 Route::post('/empresas/agregar', 'EmpresasController@agregarEmpresa')->name('agregarEmpresa');
+
+Route::get('/empresas/agregar', 'EmpresasController@agregarEmpresa')->name('agregarEmpresa');
