@@ -34,6 +34,14 @@ class DocumentoController extends Controller
       }
     }
 
+    public function verDetalleDocumento(Request $request,$id){
+      $documento = App\Documento::findOrFail($id);
+
+      return response()->json([
+        'error' => false,
+        'modal' => view('documentos.detalle',compact('documento'))->render()
+      ]);
+    }
 
     // public function agregarDocumento(Request $request){
     //     if(){

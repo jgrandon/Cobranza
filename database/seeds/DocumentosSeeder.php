@@ -14,12 +14,24 @@ class DocumentosSeeder extends Seeder
 
         DB::table('documentos')->insert(['tipo' => '33',
         'folio' => '487'
-        , 'fechaEmision' => Carbon::createFromDate(2019,1,7)
-        , 'fechaVencimiento' => Carbon::createFromDate(2019,16,7)
+        , 'fechaEmision' => Carbon::createFromDate(2019,7,1)
+        , 'fechaVencimiento' => Carbon::createFromDate(2019,7,16)
         , 'monto' => 40000
         , 'idAcreedor' => 1
         , 'idDeudor' => 2
         ]);
+
+        DB::table('cuotas')->insert([
+          'idDocumento' => 1
+          , 'fechaVencimiento' => Carbon::createFromDate(2019,7,16)
+          , 'monto' => 20000
+        ]);
+        DB::table('cuotas')->insert([
+          'idDocumento' => 1
+          , 'fechaVencimiento' => Carbon::createFromDate(2019,8,16)
+          , 'monto' => 20000
+        ]);
+
 
         DB::table('documentos')->insert(['tipo' => '34',
         'folio' => 542345
@@ -47,7 +59,6 @@ class DocumentosSeeder extends Seeder
         , 'idAcreedor' => 3
         , 'idDeudor' => 2
         ]);
-
 
     }
 }
