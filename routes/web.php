@@ -21,12 +21,10 @@ Route::get('/web', function(){
   return view('web.main2');
 });
 
-<<<<<<< HEAD
-Route::get('/deudores', 'CobranzaController@verDeudores');
-=======
 
-Route::get('/listarDocumentos', 'CobranzaController@verDocumentos');
->>>>>>> f70bf5096f85ce6a4b0fb770bd95e2a9843969a4
+Route::get('/deudores', 'CobranzaController@verDeudores');
+Route::get('/cobranza:{id}', 'CobranzaController@verCobranza')->name('verCobranza');
+
 Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard');
 Route::get('/documentos', 'DocumentoController@verDocumentos')->name('documentos');
 Route::get('/documentos:agregar','DocumentoController@verAgregarDocumento')->name('agregarDocumento');
