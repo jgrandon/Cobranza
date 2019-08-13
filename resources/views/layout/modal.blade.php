@@ -1,6 +1,6 @@
 <!-- Modal -->
-<div id="{{ $id }}" class="modal fade @if(!empty($size)) {{ $size }} @endif" role="dialog">
-  <div class="modal-dialog">
+<div id="{{ $id }}" class="modal fade " role="dialog">
+  <div class="modal-dialog @if(!empty($size)) {{ $size }} @endif">
 
     <!-- Modal content-->
     <div class="modal-content">

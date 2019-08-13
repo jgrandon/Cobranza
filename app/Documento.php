@@ -20,6 +20,9 @@ class Documento extends Model
         return 'Pendiente';
     }
 
+    public function cuotas(){
+      return Cuota::where('idDocumento',$this->id)->get();
+    }
 
     public function acreedor(){
         $acreedor = Empresa::where('id',$this->idAcreedor)->first();

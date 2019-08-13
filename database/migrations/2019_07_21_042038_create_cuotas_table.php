@@ -18,8 +18,8 @@ class CreateCuotasTable extends Migration
             $table->unsignedBigInteger('idDocumento');
             $table->timestamp('fechaVencimiento');
             $table->integer('monto');
-            $table->boolean('conciliado')->default(false);
-            $table->boolean('facturado')->default(false);
+            $table->timestamp('fechaConciliacion')->default(null)->nullable();
+            // $table->timestamp('fechaFacturacion')->default(false);
             $table->foreign('idDocumento')->references('id')->on('documentos');
             $table->timestamps();
         });
