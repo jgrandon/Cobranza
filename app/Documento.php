@@ -47,4 +47,19 @@ class Documento extends Model
           $nc->save();
         }
     }
+
+    /*
+    ** Suma los montos de cuotas ya vencidas
+    */
+    public function getMontoAdeudado(){
+      $cuotas = Cuota::where('idDocumento',$this->id)->get();
+      $totalDeuda = 0;
+      foreach($cuotas as $c){
+        $if( $c->isVencida()){
+          $totalDeuda += $c->getMontoPendiente();
+        }
+      }
+      return $totalDeuda;
+    }
+
 }

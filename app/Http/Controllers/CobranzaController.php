@@ -9,9 +9,25 @@ use Illuminate\Support\Facades\DB;
 class CobranzaController extends Controller
 {
     public function verDeudores(){
-      $idsDeudores = DB::table('documentos')->rightJoin('cuotas','documentos.id','=','cuotas.idDocumento')->where('cuotas.fechaConciliacion',null)->pluck('idDeudor')->toArray();
-      $deudores = App\Empresa::whereIn('id',$idsDeudores)->get();
-      return view('cobranza.listaDeudores',compact('deudores'));
+      $deudores = Empresa::all();
+      $deudas = [];
+      foreach ($deudores as $d) {
+        $acreedores = $d->getAcreedores();
+        foreach ($acreedores as $a) {
+          if( $d->getTotalAdeudado($a->id)>0 ){
+            $deudas[] = [
+              'deudor' => $d
+              , 'acreedor' => $a
+            ];
+          }
+        }
+      }
+
+      return view('cobranza.listaDeudores',compact('deudas'));
+
+      // $idsDeudores = DB::table('documentos')->rightJoin('cuotas','documentos.id','=','cuotas.idDocumento')->where('cuotas.fechaConciliacion',null)->pluck('idDeudor')->toArray();
+      // $deudores = App\Empresa::whereIn('id',$idsDeudores)->get();
+      // return view('cobranza.listaDeudores',compact('deudores'));
 
 
       // echo var_dump($deudores);

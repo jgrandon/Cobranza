@@ -8,26 +8,51 @@ class Empresa extends Model
 {
     //
 
+    /**
+    ** ** FUNCIONES PARA DEUDOR ** **
+    **/
 
 
-    public function getDeudas(){
-      $documentosAdeudados = Documento::where('idDeudor',$this->id)->pluck('id')->toArray();
-      $deudas = Cuota::whereIn('idDocumento',$documentosAdeudados)->get();
-      return $deudas;
+    //Devuelve los documentos adeudados
+    public function getDocumentosAdeudados($idAcreedor=null){
+      $documentosAdeudados = [];
+      $documentos = $idAcreedor==null
+                            ? Documento::where('idDeudor',$this->id)->pluck('id')->toArray()
+                            : Documento::where('idDeudor',$this->id)->where('idAcreedor',$idAcreedor)->pluck('id')->toArray();
+      // $deudas = Cuota::whereIn('idDocumento',$documentosAdeudados)->get();
+      foreach($documentos as $d){
+        if($d->getMontoAdeudado()>0){
+          $documentosAdeudados[] = $d;
+        }
+      }
+      return $documentosAdeudados;
     }
 
-    public function getFechaPrimeraCuota(){
-      $documentosAdeudados = Documento::where('idDeudor',$this->id)->pluck('id')->toArray();
+
+    public function getFechaPrimeraCuota($idAcreedor=null){
+      $documentosAdeudados = $idAcreedor==null
+                            ? Documento::where('idDeudor',$this->id)->pluck('id')->toArray()
+                            : Documento::where('idDeudor',$this->id)->where('idAcreedor',$idAcreedor)->pluck('id')->toArray();
       $primeraCuota = Cuota::whereIn('idDocumento',$documentosAdeudados)->where('fechaConciliacion',null)->orderBy('fechaVencimiento','asc')->first();
       return $primeraCuota->fechaVencimiento;
     }
 
-    public function totalDeuda(){
-      $totalDeuda = 0;
-      $deudas = $this->getDeudas();
+    public function getAcreedores(){
+      $deudas = $this->getDocumentosAdeudados();
+      $acreedores = [];
       foreach ($deudas as $d) {
-        $totalDeuda += $d->monto;
+        $acreedores = Empresa::where('id',$d->idAcreedor);
+      }
+    }
+
+    public function getTotalAdeudado($idAcreedor=null){
+      $totalDeuda = 0;
+      $deudas = $this->getDocumentosAdeudados($idAcreedor);
+      $totalDeuda = 0;
+      foreach ($deudas as $d) {
+        $totalDeuda = $d->getMontoAdeudado();
       }
       return $totalDeuda;
     }
+
 }
