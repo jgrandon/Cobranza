@@ -39,8 +39,12 @@ class CobranzaController extends Controller
     }
 
 
-    public function verCobranza($id){
-      $deudor = App\Empresa::where('id',$id)->first();
-      return view('cobranza.cobrar',compact($deudor));
+    public function verCobranza(Request $request){
+      // var_dump($request->deudor);
+      //
+      // exit();
+      $deudor = App\Empresa::where('id',$request->deudor)->first();
+      $acreedor = App\Empresa::where('id',$request->acreedor)->first();
+      return view('cobranza.cobrar',compact('deudor','acreedor'));
     }
 }

@@ -22,8 +22,8 @@ Route::get('/web', function(){
 });
 
 
-Route::get('/deudores', 'CobranzaController@verDeudores');
-Route::get('/cobranza:{id}', 'CobranzaController@verCobranza')->name('verCobranza');
+Route::get('/deudores', 'CobranzaController@verDeudores')->name('deudores');
+Route::post('/cobranza', 'CobranzaController@verCobranza')->name('verCobranza');
 
 Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard');
 Route::get('/documentos', 'DocumentoController@verDocumentos')->name('documentos');

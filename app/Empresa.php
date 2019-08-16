@@ -25,6 +25,8 @@ class Empresa extends Model
           $documentosAdeudados[] = $d;
         }
       }
+      // echo "<pre>".var_dump($d)."</pre>";
+      // exit();
       return $documentosAdeudados;
     }
 
