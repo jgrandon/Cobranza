@@ -14,6 +14,17 @@ class CreatePagosTable extends Migration
     public function up()
     {
 
+        Schema::create('pagos', function (Blueprint $table) {
+          $table->bigIncrements('id');
+          $table->integer('monto')->default(0);
+          $table->boolean('porConciliar')->default(false);
+          $table->timestamp('fechaPago')->nullable()->default(null);
+          $table->timestamp('fechaConciliacion')->nullable()->default(null);
+          $table->unsignedBigInteger('idCobranza')->nullable()->default(null);
+          $table->foreign('idCobranza')->references('id')->on('cobranzas');
+          $table->timestamps();
+        });
+
         Schema::create('pagosCuotas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('monto')->default(0);
@@ -21,18 +32,6 @@ class CreatePagosTable extends Migration
             $table->foreign('idPago')->references('id')->on('pagos');
             $table->unsignedBigInteger('idCuota');
             $table->foreign('idCuota')->references('id')->on('cuotas');
-            $table->timestamps();
-        });
-        Schema::create('pagos', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('monto')->default(0);
-            $table->boolean('porConciliar')->default('false');
-            $table->timestamp('fechaPago');
-            $table->timestamp('fechaConciliacion');
-            $table->unsignedBigInteger('idPagoCuotas');
-            $table->foreign('idPagoCuotas')->references('idCuota')->on('pagosCuotas');
-            $table->unsignedBigInteger('idCobranza');
-            $table->foreign('idCobranza')->references('id')->on('cobranzas');
             $table->timestamps();
         });
     }
@@ -44,6 +43,7 @@ class CreatePagosTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('pagosCuotas');
         Schema::dropIfExists('pagos');
     }
 }

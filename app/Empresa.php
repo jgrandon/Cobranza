@@ -17,8 +17,8 @@ class Empresa extends Model
     public function getDocumentosAdeudados($idAcreedor=null){
       $documentosAdeudados = [];
       $documentos = $idAcreedor==null
-                            ? Documento::where('idDeudor',$this->id)->pluck('id')->toArray()
-                            : Documento::where('idDeudor',$this->id)->where('idAcreedor',$idAcreedor)->pluck('id')->toArray();
+                            ? Documento::where('idDeudor',$this->id)->get()
+                            : Documento::where('idDeudor',$this->id)->where('idAcreedor',$idAcreedor)->get();
       // $deudas = Cuota::whereIn('idDocumento',$documentosAdeudados)->get();
       foreach($documentos as $d){
         if($d->getMontoAdeudado()>0){
@@ -34,15 +34,17 @@ class Empresa extends Model
                             ? Documento::where('idDeudor',$this->id)->pluck('id')->toArray()
                             : Documento::where('idDeudor',$this->id)->where('idAcreedor',$idAcreedor)->pluck('id')->toArray();
       $primeraCuota = Cuota::whereIn('idDocumento',$documentosAdeudados)->where('fechaConciliacion',null)->orderBy('fechaVencimiento','asc')->first();
-      return $primeraCuota->fechaVencimiento;
+      return $primeraCuota!=null ? $primeraCuota->fechaVencimiento : '';
     }
 
     public function getAcreedores(){
       $deudas = $this->getDocumentosAdeudados();
+      // echo "<pre>".var_dump($deudas)."</pre>";
       $acreedores = [];
       foreach ($deudas as $d) {
-        $acreedores = Empresa::where('id',$d->idAcreedor);
+        $acreedores[] = Empresa::where('id',$d->idAcreedor)->first();
       }
+      return $acreedores;
     }
 
     public function getTotalAdeudado($idAcreedor=null){

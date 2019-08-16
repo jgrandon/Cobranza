@@ -9,7 +9,7 @@
         <tr>
           <td>{{ $d['deudor']->rut }}<br>{{ $d['deudor']->razonSocial }}</td>
           <td>{{ $d['acreedor']->rut }}<br>{{ $d['acreedor']->razonSocial }}</td>
-          <td>{{ $d['deudor']->getDocumentosAdeudados($d['acreedor']) }}</td>
+          <td>{{ count($d['deudor']->getDocumentosAdeudados($d['acreedor'])) }}</td>
           <td>{{ $d['deudor']->getFechaPrimeraCuota($d['acreedor']) }}</td>
           <td>$ {{ number_format($d['deudor']->getTotalAdeudado($d['acreedor']),0,',','.') }}</td>
           <td>

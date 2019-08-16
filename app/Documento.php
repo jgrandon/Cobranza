@@ -55,7 +55,7 @@ class Documento extends Model
       $cuotas = Cuota::where('idDocumento',$this->id)->get();
       $totalDeuda = 0;
       foreach($cuotas as $c){
-        $if( $c->isVencida()){
+        if( $c->isVencida()){
           $totalDeuda += $c->getMontoPendiente();
         }
       }

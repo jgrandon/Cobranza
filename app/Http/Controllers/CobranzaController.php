@@ -9,11 +9,15 @@ use Illuminate\Support\Facades\DB;
 class CobranzaController extends Controller
 {
     public function verDeudores(){
-      $deudores = Empresa::all();
+      $deudores = App\Empresa::all();
       $deudas = [];
       foreach ($deudores as $d) {
         $acreedores = $d->getAcreedores();
+        // var_dump($acreedores);
+        // echo "<br><br>";
         foreach ($acreedores as $a) {
+          // var_dump($a);
+          // echo "a";
           if( $d->getTotalAdeudado($a->id)>0 ){
             $deudas[] = [
               'deudor' => $d
@@ -22,7 +26,7 @@ class CobranzaController extends Controller
           }
         }
       }
-
+      // exit();
       return view('cobranza.listaDeudores',compact('deudas'));
 
       // $idsDeudores = DB::table('documentos')->rightJoin('cuotas','documentos.id','=','cuotas.idDocumento')->where('cuotas.fechaConciliacion',null)->pluck('idDeudor')->toArray();
