@@ -155,6 +155,16 @@
               <button type="button" class="btn btn-info btn-cobranza" data-accion="3" name="button">Pago ya Realizado</button>
               <button type="button" class="btn btn-info btn-cobranza" data-accion="4" name="button">Otra Respuesta</button>
             </div>
+
+            <div style="display:none" class="panel-cobranza-0">
+              <form action="{{ route('finalizarCobranza') }}" method="post">
+                <p style="color:red;">*Se solicitará al cliente confirmacion de datos de contacto</p>
+                <label for="">Observaciones</label>
+                <textarea name="name" rows="3" cols="80"></textarea>
+                <button class="btn btn-success" type="submit" name="button"><i class="glyphicon glyphicon-ok"></i> Finalizar</button>
+              </form>
+            </div>
+
           </div>
         </div>
       </div>
@@ -170,5 +180,5 @@
 @endsection
 
 @section('script')
-  <script type="text/javascript" src="{{ assets('js/cobranza.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('js/cobranza.js') }}"></script>
 @endsection
