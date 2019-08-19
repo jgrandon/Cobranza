@@ -59,4 +59,26 @@ class Empresa extends Model
       return $totalDeuda;
     }
 
+
+    /*
+    ** Retorna las contactos asociadas a determinado acreedor
+    */
+    public function getContactos($acreedor=null){
+        $contactos = $acreedor==null
+                    ? Contacto::all()->get()
+                    : Contacto::where('idAcreedor',$acreedor->id)->get();
+        return $contactos;
+    }
+
+
+    /*
+    ** Retorna las direcciones asociadas a determinado acreedor
+    */
+    public function getDirecciones($acreedor=null){
+        $direcciones = $acreedor==null
+                    ? Direccion::all()->get()
+                    : Direccion::where('idAcreedor',$acreedor->id)->get();
+        return $direcciones;
+    }
+
 }

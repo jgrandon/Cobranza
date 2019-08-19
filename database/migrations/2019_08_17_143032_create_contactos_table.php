@@ -15,10 +15,14 @@ class CreateContactosTable extends Migration
     {
         Schema::create('contactos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre');
-            $table->string('cargo');
-            $table->string('telefono');
-            $table->string('email');
+            $table->string('nombre')->default('');
+            $table->string('cargo')->default('');
+            $table->string('telefono')->default('');
+            $table->string('email')->default('');
+            $table->unsignedBigInteger('idDeudor');
+            $table->foreign('idDeudor')->references('id')->on('empresas');
+            $table->unsignedBigInteger('idAcreedor');
+            $table->foreign('idAcreedor')->references('id')->on('empresas');
             $table->timestamps();
         });
     }

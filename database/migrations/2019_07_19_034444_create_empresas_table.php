@@ -22,20 +22,6 @@ class CreateEmpresasTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('comunas', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('nombre');
-        });
-
-        Schema::create('direcciones', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('direccion');
-            $table->unsignedBigInteger('idComuna');
-            $table->unsignedBigInteger('idEmpresa');
-            $table->foreign('idComuna')->references('id')->on('comunas');
-            $table->foreign('idEmpresa')->references('id')->on('empresas');
-        });
-
     }
 
     /**

@@ -15,11 +15,18 @@
           <td>
             {!! Form::open(['route' => ['verCobranza', 'deudor'=>$d['deudor']->id,'acreedor'=>$d['acreedor']->id ], 'method' => 'POST']) !!}
               <!--<a href="{{ route('verCobranza',$d['deudor']->id,$d['acreedor']->id) }}" class=" btn-ver btn btn-info btn-round btn-xs">Cobrar</a>-->
-              <button type="success" name="button">Cobrar</button>
+              <button type="success" class="btn btn-success btn-xs btn-round" name="button">Cobrar</button>
             {!! Form::close() !!}
           </td>
         </tr>
       @endforeach
     @endsection
   @endcomponent
+@endsection
+@section('script')
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#dt-deudores").DataTable();
+    });
+  </script>
 @endsection

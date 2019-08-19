@@ -20,6 +20,10 @@ class Documento extends Model
         return 'Pendiente';
     }
 
+    public function nombreDoc(){
+      return $this->tipoDocumento==33 ? 'Factura Electronica' : 'Factura Exenta Electronica';
+    }
+
     public function cuotas(){
       return Cuota::where('idDocumento',$this->id)->get();
     }
@@ -60,6 +64,18 @@ class Documento extends Model
         }
       }
       return $totalDeuda;
+    }
+
+
+    public function getCuotasPendientes(){
+      $cuotasPendientes = [];
+      $cuotas = Cuota::where('idDocumento',$this->id)->get();
+      foreach($cuotas as $c){
+        if( $c->isVencida() && $c->getMontoPendiente()>0 ){
+          $cuotasPendientes[] = $c;
+        }
+      }
+      return $cuotasPendientes;
     }
 
 }

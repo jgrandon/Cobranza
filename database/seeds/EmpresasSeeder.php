@@ -10,14 +10,6 @@ class EmpresasSeeder extends Seeder
      * @return voi */
     public function run()
     {
-        //
-        DB::table('comunas')->insert(['nombre' => 'Cerrillos']);
-        DB::table('comunas')->insert(['nombre' => 'Maipu']);
-        DB::table('comunas')->insert(['nombre' => 'Puente Alto']);
-        DB::table('comunas')->insert(['nombre' => 'Estacion Central']);
-        DB::table('comunas')->insert(['nombre' => 'Santiago Centro']);
-        DB::table('comunas')->insert(['nombre' => 'Ñuñoa']);
-
         DB::table('empresas')->insert(['rut' => '12345678-9',
         'razonSocial' => 'Ripley',
         'paginaWeb' => 'ripley.cl']);
@@ -27,6 +19,5 @@ class EmpresasSeeder extends Seeder
         DB::table('empresas')->insert(['rut' => '6485350-3',
         'razonSocial' => 'Almacen don Pepe',
         'paginaWeb' => 'jota-apps.cl']);
-
     }
 }
