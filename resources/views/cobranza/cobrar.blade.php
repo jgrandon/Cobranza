@@ -158,12 +158,90 @@
 
             <div style="display:none" class="panel-cobranza-0">
               <form action="{{ route('finalizarCobranza') }}" method="post">
-                <p style="color:red;">*Se solicitará al cliente confirmacion de datos de contacto</p>
-                <label for="">Observaciones</label>
-                <textarea name="name" rows="3" cols="80"></textarea>
-                <button class="btn btn-success" type="submit" name="button"><i class="glyphicon glyphicon-ok"></i> Finalizar</button>
+                <div class="col-lg-6">
+                  Fecha : {{ Carbon\Carbon::now()->format('d/m/Y') }}
+                  <p style="color:red;">*Se solicitará al cliente confirmacion de datos de contacto</p>
+                  <br>
+                  <div class="button-group">
+                    <button class="btn btn-success btn-sm " type="submit" name="button"><i class="glyphicon glyphicon-ok"></i> Finalizar</button>
+                    <a class="btn btn-warning btn-sm btn-cobranza" type="button" name="button"><i class="glyphicon glyphicon-remove"></i> Cancelar</a>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <label for="">Observaciones</label>
+                  <textarea name="name" class="form-control" rows="3"></textarea>
+                </div>
               </form>
             </div>
+
+
+            <div style="display:none" class="panel-cobranza-1">
+              <form action="{{ route('finalizarCobranza') }}" method="post">
+                <div class="col-lg-6">
+                  Fecha : {{ Carbon\Carbon::now()->format('d/m/Y') }}
+                  <br>
+                  @foreach ($deudor->getDocumentosAdeudados($acreedor->id) as $i => $doc)
+                    {{-- @if($doc->getPDF()!=null)
+
+                    @else
+
+                    @endif --}}
+
+                    {{ $doc->nombreDoc() }} #{{ $doc->folio }} <button type="button" name="button" class="btn btn-danger btn-round btn-xs">Reenviar PDF</button>
+                    <input type="checkbox" class="chk-pdf">
+                    <br>
+                  @endforeach
+                  <!--
+                  <p style="color:red;">*Se solicitará al cliente confirmacion de datos de contacto</p>
+                -->
+                  <br>
+                  <div class="button-group">
+                    <button class="btn btn-success btn-sm " type="submit" name="button"><i class="glyphicon glyphicon-ok"></i> Finalizar</button>
+                    <a class="btn btn-warning btn-sm btn-cobranza" type="button" name="button"><i class="glyphicon glyphicon-remove"></i> Cancelar</a>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <label for="">Observaciones</label>
+                  <textarea name="name" class="form-control" rows="3"></textarea>
+                </div>
+              </form>
+            </div>
+
+
+            <div style="display:none" class="panel-cobranza-2">
+              <form action="{{ route('finalizarCobranza') }}" method="post">
+                <div class="col-lg-6">
+                  <label for="">Observaciones</label>
+                  <textarea name="name" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="col-lg-6">
+                  Fecha : {{ Carbon\Carbon::now()->format('d/m/Y') }}
+                  <br>
+                  @foreach ($deudor->getDocumentosAdeudados($acreedor->id) as $i => $doc)
+                    {{-- @if($doc->getPDF()!=null)
+
+                    @else
+
+                    @endif --}}
+
+                    {{ $doc->nombreDoc() }} #{{ $doc->folio }} <button type="button" name="button" class="btn btn-danger btn-round btn-xs">Reenviar PDF</button>
+                    <input type="checkbox" class="chk-pdf">
+                    <br>
+                  @endforeach
+                  <!--
+                  <p style="color:red;">*Se solicitará al cliente confirmacion de datos de contacto</p>
+                -->
+                  <br>
+                  <div class="button-group">
+                    <button class="btn btn-success btn-sm " type="submit" name="button"><i class="glyphicon glyphicon-ok"></i> Finalizar</button>
+                    <a class="btn btn-warning btn-sm btn-cobranza" type="button" name="button"><i class="glyphicon glyphicon-remove"></i> Cancelar</a>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+
+
 
           </div>
         </div>

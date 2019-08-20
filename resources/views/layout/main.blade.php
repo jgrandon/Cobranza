@@ -28,6 +28,9 @@
 
     <!-- Custom Theme Style -->
     <link href="gentelella/build/css/custom.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Toggle -->
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
   </head>
 
   <body class="nav-md">
@@ -1027,6 +1030,9 @@
 
     <!-- Custom Theme Scripts -->
     <script src="gentelella/build/js/custom.min.js"></script>
+
+    <!-- Bootstrap Toggle -->
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     @yield('script')
   </body>
 </html>
