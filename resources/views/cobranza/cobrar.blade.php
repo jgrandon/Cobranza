@@ -138,40 +138,30 @@
     </div>
   </div>
 
+
+  <input type="hidden" name="idDeudor" id="idDeudor" value="{{ $deudor->id}}">
+  <input type="hidden" name="idAcreedor" id="idAcreedor" value="{{ $acreedor->id}}">
+
+
   <div class="row">
     <div class="col-lg-12">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h4>
-            <a href="#cobranza" data-toggle="collapse" aria-expanded="true">Cobranza Actual</a>
+            <a href="#panel-cobranza" data-toggle="collapse" aria-expanded="true">Cobranza Actual</a>
           </h4>
         </div>
-        <div id="cobranza" class="panel-collapse collapse in" aria-expanded="true">
+        <div id="panel-cobranza" class="panel-collapse collapse in" aria-expanded="true">
           <div class="panel-body">
             <div class="panel-inicial">
-              <button type="button" class="btn btn-info btn-cobranza" data-accion="0" name="button">Sin Respuesta</button>
-              <button type="button" class="btn btn-info btn-cobranza" data-accion="1" name="button">No reconoce documento</button>
-              <button type="button" class="btn btn-info btn-cobranza" data-accion="2" name="button">Compromiso de Pago</button>
-              <button type="button" class="btn btn-info btn-cobranza" data-accion="3" name="button">Pago ya Realizado</button>
-              <button type="button" class="btn btn-info btn-cobranza" data-accion="4" name="button">Otra Respuesta</button>
+              <button type="button" class="btn btn-info btn-cobranza" data-accion="sin-respuesta" name="button">Sin Respuesta</button>
+              <button type="button" class="btn btn-info btn-cobranza" data-accion="no-reconoce" name="button">No reconoce documento</button>
+              <button type="button" class="btn btn-info btn-cobranza" data-accion="compromiso" name="button">Compromiso de Pago</button>
+              <button type="button" class="btn btn-info btn-cobranza" data-accion="pago-realizado" name="button">Pago ya Realizado</button>
+              <button type="button" class="btn btn-info btn-cobranza" data-accion="otro" name="button">Otra Respuesta</button>
             </div>
+            <div style="display:none" class="panel-accion-cobranza">
 
-            <div style="display:none" class="panel-cobranza-0">
-              <form action="{{ route('finalizarCobranza') }}" method="post">
-                <div class="col-lg-6">
-                  Fecha : {{ Carbon\Carbon::now()->format('d/m/Y') }}
-                  <p style="color:red;">*Se solicitará al cliente confirmacion de datos de contacto</p>
-                  <br>
-                  <div class="button-group">
-                    <button class="btn btn-success btn-sm " type="submit" name="button"><i class="glyphicon glyphicon-ok"></i> Finalizar</button>
-                    <a class="btn btn-warning btn-sm btn-cobranza" type="button" name="button"><i class="glyphicon glyphicon-remove"></i> Cancelar</a>
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <label for="">Observaciones</label>
-                  <textarea name="name" class="form-control" rows="3"></textarea>
-                </div>
-              </form>
             </div>
 
 
@@ -210,6 +200,12 @@
 
             <div style="display:none" class="panel-cobranza-2">
               <form action="{{ route('finalizarCobranza') }}" method="post">
+                <div class="col-lg-8">
+
+                </div>
+                <div class="col-lg-4">
+
+                </div>
                 <div class="col-lg-6">
                   <label for="">Observaciones</label>
                   <textarea name="name" class="form-control" rows="3"></textarea>
@@ -217,7 +213,8 @@
                 <div class="col-lg-6">
                   Fecha : {{ Carbon\Carbon::now()->format('d/m/Y') }}
                   <br>
-                  @foreach ($deudor->getDocumentosAdeudados($acreedor->id) as $i => $doc)
+                    @foreach ($deudor->getDocumentosAdeudados($acreedor->id) as $i => $doc)
+
                     {{-- @if($doc->getPDF()!=null)
 
                     @else

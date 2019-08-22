@@ -47,4 +47,22 @@ class CobranzaController extends Controller
       $acreedor = App\Empresa::where('id',$request->acreedor)->first();
       return view('cobranza.cobrar',compact('deudor','acreedor'));
     }
+
+    public function getOpcionCobranza(Request $request){
+      $deudor = App\Empresa::where('id',$request->idDeudor)->first();
+      $acreedor = App\Empresa::where('id',$request->idAcreedor)->first();
+      $a = $request->accion;
+      return view( 'cobranza.opcion.'.camel_case($request->accion) );
+      // if( $a=='sin-respuesta' ){
+      //   return view('cobranza.opcion.sinRespuesta');
+      // }elseif( $a=='no-reconoce' ){
+      //   return view('cobranza.opcion.noReconoce');
+      // }elseif( $a=='compromiso' ){
+      //   return view('cobranza.opcion.compromiso');
+      // }elseif( $a=='pago-realizado' ){
+      //   return view('cobranza.opcion.pagoRealizado');
+      // }elseif( $a=='otro' ){
+      //   return view('cobranza.opcion.sinRespuesta');
+      // }
+    }
 }
