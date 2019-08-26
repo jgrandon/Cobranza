@@ -13,19 +13,20 @@ class CreateCobranzasTable extends Migration
      */
     public function up()
     {
-        Schema::create('estadosCobranza', function (Blueprint $table) {
-          $table->bigIncrements('id');
-          $table->string('nombre');
-          $table->timestamps();
-        });
+        // Schema::create('estadosCobranza', function (Blueprint $table) {
+        //   $table->bigIncrements('id');
+        //   $table->string('nombre');
+        //   $table->timestamps();
+        // });
 
         Schema::create('cobranzas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('idCuota');
-            $table->unsignedBigInteger('idEstado');
+            $table->unsignedBigInteger('idDocumento');
+            $table->string('estado');
+            // $table->unsignedBigInteger('idEstado');
             $table->string('observacion');
-            $table->foreign('idCuota')->references('id')->on('cuotas');
-            $table->foreign('idEstado')->references('id')->on('estadosCobranza');
+            $table->foreign('idDocumento')->references('id')->on('documentos');
+            // $table->foreign('idEstado')->references('id')->on('estadosCobranza');
             $table->timestamps();
         });
 
@@ -39,6 +40,6 @@ class CreateCobranzasTable extends Migration
     public function down()
     {
         Schema::dropIfExists('cobranzas');
-        Schema::dropIfExists('estadosCobranza');
+        // Schema::dropIfExists('estadosCobranza');
     }
 }

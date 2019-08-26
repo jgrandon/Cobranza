@@ -52,7 +52,7 @@ class CobranzaController extends Controller
       $deudor = App\Empresa::where('id',$request->idDeudor)->first();
       $acreedor = App\Empresa::where('id',$request->idAcreedor)->first();
       $a = $request->accion;
-      return view( 'cobranza.opcion.'.camel_case($request->accion) );
+      return view( 'cobranza.opcion.'.camel_case($request->accion),compact('deudor','acreedor') );
       // if( $a=='sin-respuesta' ){
       //   return view('cobranza.opcion.sinRespuesta');
       // }elseif( $a=='no-reconoce' ){
@@ -64,5 +64,32 @@ class CobranzaController extends Controller
       // }elseif( $a=='otro' ){
       //   return view('cobranza.opcion.sinRespuesta');
       // }
+    }
+
+    function finalizarCobranza(Request $request){
+      $acreedor = App\Empresa::where('id',$request->idAcreedor)->first();
+      $deudor = App\Empresa::where('id',$request->idDeudor)->first();
+      if( $request->accion == 'sin-respuesta' ){
+        if( !empty($request->confirmarContacto) ){
+          $contactos = $deudor->getContactos($acreedor);
+          foreach($contactos as $c){
+            $c->solicitarConfirmacion = true;
+            $c->save();
+          }
+        }
+      }
+      elseif( $request->accion == 'no-reconoce'){
+
+      }else{
+        return back();
+      }
+      $documentos = $deudor->getDocumentosAdeudados($acreedor->id);
+      foreach ($documentos as $doc) {
+        $cobranza = new Cobranza();
+        $cobranza->estado = $request->accion;
+        $cobranza->observacion = $request->observacion;
+        $cobranza->idDocumento = $doc->id;
+        $estado
+      }
     }
 }

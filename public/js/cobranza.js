@@ -27,9 +27,29 @@ $(".btn-cobranza").on('click',function(){
           $(".panel-accion-cobranza").hide(100);
           $(".panel-inicial").show(100);
         })
+        $(".chk-pdf").bootstrapToggle({
+          on : "Solicitar Envio"
+          , off : "No Solicitar Envio"
+          , size : "mini"
+          , width : 130
+          , onstyle : "success"
+        });
+        $(".chk-confirmar-contacto").bootstrapToggle({
+          on : "Si"
+          , off : "No"
+          , size : "mini"
+          , width : 20
+          , onstyle : "success"
+        });
+        $("[data-toggle=\"datepicker\"]").datepicker();
+
         $(".panel-accion-cobranza").show(100);
     }
+    , error : function(){
+        alert(' ERROR EN LA COMUNICACION');
+    }
   });
+
 
   //
   // switch(accion){
@@ -58,16 +78,8 @@ $(".btn-cobranza").on('click',function(){
   // }
 });
 
-$(".chk-pdf").bootstrapToggle({
-  on : "Solicitar Envio"
-  , off : "No Solicitar Envio"
-  , size : "mini"
-  , width : 130
-  , onstyle : "success"
-});
+
 
 function verOpcionCobranza(accion){
-
-
 
 }

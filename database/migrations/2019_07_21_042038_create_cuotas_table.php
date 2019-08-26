@@ -15,6 +15,7 @@ class CreateCuotasTable extends Migration
     {
         Schema::create('cuotas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('numeroCuota');
             $table->unsignedBigInteger('idDocumento');
             $table->timestamp('fechaVencimiento');
             $table->integer('monto');

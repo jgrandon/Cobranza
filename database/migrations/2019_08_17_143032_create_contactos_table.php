@@ -19,6 +19,7 @@ class CreateContactosTable extends Migration
             $table->string('cargo')->default('');
             $table->string('telefono')->default('');
             $table->string('email')->default('');
+            $table->boolean('solicitarConfirmacion')->default(false);
             $table->unsignedBigInteger('idDeudor');
             $table->foreign('idDeudor')->references('id')->on('empresas');
             $table->unsignedBigInteger('idAcreedor');
