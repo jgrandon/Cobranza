@@ -106,28 +106,57 @@
                       <br>
                       Total   : $ {{number_format($doc->monto,0,',','.')}}
                     </p>
+
                     <div class="row">
                       <div class="panel panel-default">
                         <div class="panel-heading">
-                          Cobranzas Previas
+                            <a href="#cobranzas-previas" data-toggle="collapse" aria-expanded="true">Cuotas</a>
                         </div>
-                        <div class="panel-body">
-                          @component('layout.table')
+                        <div id="cobranzas-previas" class="panel-collapse collapse" >
+                          <div class="panel-body">
+                            @component('layout.table')
                             @slot('id','dt-cuotas-{{$c->id}}')
-                            @slot('headers',['Fecha','Estado','Observacion'])
-                            @section('body')
-                              @foreach ($doc->cuotas() as $j => $c)
-                                <tr>
-                                  <td>{{$c->fechaVencimiento}}</td>
-                                  <td></td>
-                                  <td></td>
-                                </tr>
-                              @endforeach
-                            @endsection
-                          @endcomponent
+                            @slot('headers',['Fecha','Documento','Monto'])
+                              @section('body')
+                                @foreach ($doc->cuotas() as $j => $c)
+                                  <tr>
+                                    <td>{{$c->fechaVencimiento}}</td>
+                                    <td></td>
+                                    <td></td>
+                                  </tr>
+                                @endforeach
+                              @endsection
+                            @endcomponent
+                          </div>
                         </div>
                       </div>
                     </div>
+
+                    <div class="row">
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a href="#cobranzas-previas" data-toggle="collapse" aria-expanded="true">Cobranzas Previas</a>
+                        </div>
+                        <div id="cobranzas-previas" class="panel-collapse collapse" >
+                          <div class="panel-body">
+                            @component('layout.table')
+                            @slot('id','dt-cuotas-{{$c->id}}')
+                            @slot('headers',['Fecha','Estado','Observacion'])
+                              @section('body')
+                                @foreach ($doc->cobranzas() as $j => $c)
+                                  <tr>
+                                    <td>{{$c->fecha}}</td>
+                                    <td>{{$c->estado}}</td>
+                                    <td>{{$c->observacion}}</td>
+                                  </tr>
+                                @endforeach
+                              @endsection
+                            @endcomponent
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                   </div>
                 @endforeach
               </div>

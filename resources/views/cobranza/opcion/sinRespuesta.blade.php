@@ -1,7 +1,8 @@
   <form action="{{ route('finalizarCobranza') }}" method="post">
-    <input type="hidden" name="accion" value="sin-respuesta">
+    @csrf()
+    <input type="hidden" name="estado" value="sin-respuesta">
     <input type="hidden" name="idDeudor" value="{{ $deudor->id }}">
-    <input type="hidden" name=idAcreedor"" value="{{ $acreedor->id}}">
+    <input type="hidden" name="idAcreedor" value="{{ $acreedor->id }}">
     <div class="col-lg-6">
       <div class="row">
         <h2>El contacto no ha contestado la llamada.</h2>
@@ -23,6 +24,6 @@
 
     <div class="col-lg-6">
       <label for="">Observaciones</label>
-      <textarea name="obsercacion" class="form-control" rows="3"></textarea>
+      <textarea name="observacion" class="form-control" rows="3"></textarea>
     </div>
   </form>

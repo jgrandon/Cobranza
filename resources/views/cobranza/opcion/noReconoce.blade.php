@@ -1,5 +1,9 @@
 <form action="{{ route('finalizarCobranza') }}" class="form-group" method="post">
-  <input type="hidden" name="accion" value="no-reconoce">
+  @csrf()
+  <input type="hidden" name="estado" value="no-reconoce">
+  <input type="hidden" name="idDeudor" value="{{ $deudor->id }}">
+  <input type="hidden" name="idAcreedor" value="{{ $acreedor->id }}">
+
   <h3>El cliente necesita mas informacion referente a los documentos adeudados.</h3>
   <div class="col-lg-6">
     <div class="col-lg-12">
@@ -25,7 +29,7 @@
             @if( $doc->pdfCargado )
               <button type="button" name="button" class="btn btn-danger btn-round btn-xs">Reenviar PDF</button>
             @else
-              <input type="checkbox" class="chk-pdf">
+              <input type="checkbox" class="chk-pdf" name="pdf[]" value="{{$doc->id}}">
             @endif
           </div>
           <br>
@@ -51,7 +55,7 @@
     <div class="row">
       <div class="col-lg-12">
         <label for="">Observaciones</label>
-        <textarea name="obsercacion" class="form-control" rows="3"></textarea>
+        <textarea name="observacion" class="form-control" rows="3"></textarea>
 
       </div>
     </div>

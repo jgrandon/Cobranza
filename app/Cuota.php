@@ -10,7 +10,7 @@ class Cuota extends Model
 {
     //
   public function cobranzas(){
-    return Cuota::where('idDocumento',$this->id);
+    return Cobranza::where('idDocumento',$this->id);
   }
 
   public function isVencida(){

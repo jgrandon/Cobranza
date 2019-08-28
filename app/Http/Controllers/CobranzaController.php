@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class CobranzaController extends Controller
 {
-    public function verDeudores(){
+    public function verDeudores($mensaje=null){
       $deudores = App\Empresa::all();
       $deudas = [];
       foreach ($deudores as $d) {
@@ -27,7 +27,7 @@ class CobranzaController extends Controller
         }
       }
       // exit();
-      return view('cobranza.listaDeudores',compact('deudas'));
+      return view('cobranza.listaDeudores',compact('deudas','mensaje'));
 
       // $idsDeudores = DB::table('documentos')->rightJoin('cuotas','documentos.id','=','cuotas.idDocumento')->where('cuotas.fechaConciliacion',null)->pluck('idDeudor')->toArray();
       // $deudores = App\Empresa::whereIn('id',$idsDeudores)->get();
@@ -69,7 +69,8 @@ class CobranzaController extends Controller
     function finalizarCobranza(Request $request){
       $acreedor = App\Empresa::where('id',$request->idAcreedor)->first();
       $deudor = App\Empresa::where('id',$request->idDeudor)->first();
-      if( $request->accion == 'sin-respuesta' ){
+      // return $request;
+      if( $request->estado == 'sin-respuesta' ){
         if( !empty($request->confirmarContacto) ){
           $contactos = $deudor->getContactos($acreedor);
           foreach($contactos as $c){
@@ -78,18 +79,38 @@ class CobranzaController extends Controller
           }
         }
       }
-      elseif( $request->accion == 'no-reconoce'){
-
+      elseif( $request->estado == 'no-reconoce'){
+        if(!empty($request->pdf)){
+          foreach($request->pdf as $idDoc){
+            $documento = App\Documento::find($idDoc);
+            $documento->solicitarPdf = true;
+            $documento->save();
+          }
+        }
       }else{
-        return back();
+        // echo 'tu mama es weona';
+        // exit();
+        // return back();
       }
+      // return $request;
+      // var_dump($request->observacion);
+      // exit();
       $documentos = $deudor->getDocumentosAdeudados($acreedor->id);
       foreach ($documentos as $doc) {
-        $cobranza = new Cobranza();
-        $cobranza->estado = $request->accion;
-        $cobranza->observacion = $request->observacion;
-        $cobranza->idDocumento = $doc->id;
-        $estado
+        $this->registrarCobranza($request,$doc);
       }
+
+      return redirect('deudores')->with('mensaje','guardado');
     }
+
+
+    function registrarCobranza($req /* Request */ ,$doc /* Documento */ ){
+      $cobranza = new App\Cobranza();
+      $cobranza->estado = $req->estado;
+      $cobranza->observacion = $req->observacion==null ? "" : $req->observacion;
+      $cobranza->idDocumento = $doc->id;
+      $cobranza->estado = $req->estado;
+      $cobranza->save();
+    }
+
 }
