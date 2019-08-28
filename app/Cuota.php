@@ -9,9 +9,6 @@ use Illuminate\Support\Facades\DB;
 class Cuota extends Model
 {
     //
-  public function cobranzas(){
-    return Cobranza::where('idDocumento',$this->id);
-  }
 
   public function isVencida(){
     return $this->fechaVencimiento->lt( Carbon\Carbon::now() );

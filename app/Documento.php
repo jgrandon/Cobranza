@@ -28,6 +28,10 @@ class Documento extends Model
       return Cuota::where('idDocumento',$this->id)->get();
     }
 
+    public function cobranzas(){
+      return Cobranza::where('idDocumento',$this->id)->get();
+    }
+
     public function acreedor(){
         $acreedor = Empresa::where('id',$this->idAcreedor)->first();
         return $acreedor;
