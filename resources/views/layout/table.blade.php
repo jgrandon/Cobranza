@@ -7,7 +7,7 @@
     </tr>
   </thead>
   <tbody>
-    @yield('body')
+    {{ $body }}
   </tbody>
 </table>
 <script type="text/javascript">

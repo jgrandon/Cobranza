@@ -117,7 +117,7 @@
                             @component('layout.table')
                             @slot('id','dt-cuotas-'.$doc->id)
                             @slot('headers',['Fecha','Documento','Monto'])
-                              @section('body')
+                              @slot('body')
                                 @foreach ($doc->cuotas() as $j => $c)
                                   <tr>
                                     <td>{{$c->fechaVencimiento}}</td>
@@ -125,7 +125,7 @@
                                     <td>{{$c->monto}}</td>
                                   </tr>
                                 @endforeach
-                              @stop
+                              @endslot
                             @endcomponent
                           </div>
                         </div>
@@ -136,14 +136,13 @@
                       <div class="panel panel-default">
                         <div class="panel-heading">
                             <a href="#cobranzas-previas" data-toggle="collapse" aria-expanded="true">Cobranzas Previas</a>
-                            {{ var_dump($doc->cobranzas()) }}
                         </div>
                         <div id="cobranzas-previas" class="panel-collapse collapse" >
                           <div class="panel-body">
                             @component('layout.table')
                             @slot('id',"dt-cobranzas-".$doc->id)
                             @slot('headers',['Fecha','Estado','Observacion'])
-                              @section('body')
+                              @slot('body')
                                 @foreach ($doc->cobranzas() as $j => $c)
                                   <tr>
                                     <td>{{$c->fecha}}</td>
@@ -151,7 +150,7 @@
                                     <td>{{$c->observacion}}</td>
                                   </tr>
                                 @endforeach
-                              @stop
+                              @endslot
                             @endcomponent
                           </div>
                         </div>

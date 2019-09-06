@@ -10,7 +10,7 @@
     @component('layout.table')
       @slot('id','dt-deudores')
         @slot('headers',['Deudor','Acreedor','N° Cuotas','Fecha Deuda','Monto Adeudado',''])
-          @section('body')
+          @slot('body')
             @foreach($deudas as $d)
               <tr>
                 <td>{{ $d['deudor']->rut }}<br>{{ $d['deudor']->razonSocial }}</td>
@@ -26,7 +26,7 @@
                 </td>
               </tr>
             @endforeach
-          @endsection
+          @endslot
         @endcomponent
   </div>
   @if( !empty(session('mensaje')) )
