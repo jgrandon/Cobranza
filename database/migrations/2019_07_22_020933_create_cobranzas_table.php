@@ -1,5 +1,5 @@
 <?php
-
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -23,11 +23,12 @@ class CreateCobranzasTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('idDocumento');
             $table->string('estado');
+            $table->timestamp('fecha')->default( Carbon::now() );
             // $table->unsignedBigInteger('idEstado');
             $table->string('observacion');
             $table->foreign('idDocumento')->references('id')->on('documentos');
             // $table->foreign('idEstado')->references('id')->on('estadosCobranza');
-            $table->timestamps();
+            // $table->timestamps();
         });
 
     }

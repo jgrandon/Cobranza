@@ -66,6 +66,8 @@ class CobranzaController extends Controller
       // }
     }
 
+
+
     function finalizarCobranza(Request $request){
       $acreedor = App\Empresa::where('id',$request->idAcreedor)->first();
       $deudor = App\Empresa::where('id',$request->idDeudor)->first();
@@ -87,6 +89,16 @@ class CobranzaController extends Controller
             $documento->save();
           }
         }
+      }elseif( $request->estado == 'compromiso' ){
+        $request->observacion = "El cliente se compromete a pagar el {$request->fechaCompromiso} - {$request->observacion}";
+        foreach ($request->cuotas as $c) {
+          $cuota = App\Cuota::findOrFail($c);
+          $compromiso = new App\CompromisoPago();
+          $compromiso->idAcreedor = $request->idAcreedor;
+          $compromiso->idDeudor = $request->idDeudor;
+          $compromiso->idCuota = $cuota->id;
+          $compromiso->save();
+        }
       }else{
         // echo 'tu mama es weona';
         // exit();
@@ -102,6 +114,8 @@ class CobranzaController extends Controller
 
       return redirect('deudores')->with('mensaje','guardado');
     }
+
+
 
 
     function registrarCobranza($req /* Request */ ,$doc /* Documento */ ){
