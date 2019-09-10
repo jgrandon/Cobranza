@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div id="{{ $id }}" class="modal fade " role="dialog">
-  <div class="modal-dialog @if(!empty($size)) {{ $size }} @endif">
+  <div class="modal-dialog @if(!empty($size)) modal-{{ $size }} @endif">
 
     <!-- Modal content-->
     <div class="modal-content">
@@ -9,11 +9,15 @@
         <h4 class="modal-title">{{ $title }}</h4>
       </div>
       <div class="modal-body">
-        @yield('body')
+        @if( !empty($body) )
+          {{$body}}
+        @endif
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
+      @if( !empty($footer) )
+        <div class="modal-footer">
+          {{$footer}}
+        </div>
+      @endif
     </div>
 
   </div>

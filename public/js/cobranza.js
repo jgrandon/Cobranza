@@ -34,6 +34,9 @@ $(".btn-cobranza").on('click',function(){
           , width : 130
           , onstyle : "success"
         });
+
+
+        //eventos por-confirmar
         $(".chk-confirmar-contacto").bootstrapToggle({
           on : "Si"
           , off : "No"
@@ -42,6 +45,16 @@ $(".btn-cobranza").on('click',function(){
           , onstyle : "success"
         });
         $("[data-toggle=\"datepicker\"]").datepicker();
+
+        /*  eventos pago-realizado  */
+        var dtMp = $("#dt-mp").DataTable({
+          ordering : false
+          , searching : false
+        });
+        //agregar medio pago
+        $(".btn-mp").click( agregarMedioPago(dtMp) );
+
+
 
         $(".panel-accion-cobranza").show(100);
     }
@@ -78,7 +91,21 @@ $(".btn-cobranza").on('click',function(){
   // }
 });
 
+function agregarMedioPago(tabla){
+  // if( tabla==null ) return false;
+  // console.log(tabla);
+  return false;
+  tabla.row().add([
+    "<a  class=\"btn-x-mp btn btn-sm btn-danger\"><i class=\"glyphicon glyphicon-remove\"><i></a>"
+    ,
+  ]);
 
+  //eliminar medio pago
+  $(".btn-x-mp").unbind().click(function(){
+    tabla.row( $(this).parents('tr') ).remove( ).draw(false);
+  });
+
+}
 
 function verOpcionCobranza(accion){
 

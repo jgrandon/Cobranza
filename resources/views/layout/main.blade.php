@@ -35,6 +35,8 @@
 
     <link href="datepicker/datepicker.min.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
   </head>
 
   <body class="nav-md">
@@ -1041,6 +1043,10 @@
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
     <script src="datepicker/datepicker.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js">
+
+    </script>
 
     @yield('script')
   </body>

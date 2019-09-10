@@ -52,7 +52,8 @@ class CobranzaController extends Controller
       $deudor = App\Empresa::where('id',$request->idDeudor)->first();
       $acreedor = App\Empresa::where('id',$request->idAcreedor)->first();
       $a = $request->accion;
-      return view( 'cobranza.opcion.'.camel_case($request->accion),compact('deudor','acreedor') );
+      $mediosPago = App\MedioPago::all();
+      return view( 'cobranza.opcion.'.camel_case($request->accion),compact('deudor','acreedor','mediosPago') );
       // if( $a=='sin-respuesta' ){
       //   return view('cobranza.opcion.sinRespuesta');
       // }elseif( $a=='no-reconoce' ){
@@ -89,7 +90,7 @@ class CobranzaController extends Controller
             $documento->save();
           }
         }
-      }elseif( $request->estado == 'compromiso' ){
+      } elseif( $request->estado == 'compromiso' ) {
         $request->observacion = "El cliente se compromete a pagar el {$request->fechaCompromiso} - {$request->observacion}";
         foreach ($request->cuotas as $c) {
           $cuota = App\Cuota::findOrFail($c);
@@ -99,9 +100,11 @@ class CobranzaController extends Controller
           $compromiso->idCuota = $cuota->id;
           $compromiso->save();
         }
-      }else{
-        // echo 'tu mama es weona';
-        // exit();
+      } elseif( $request->estado == 'pago-realizado') {
+        $pago = 0;
+      } else {
+        echo 'tu mama es weona';
+        exit();
         // return back();
       }
       // return $request;
