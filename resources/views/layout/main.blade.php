@@ -1044,10 +1044,9 @@
 
     <script src="datepicker/datepicker.min.js"></script>
 
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js">
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
-    </script>
-
+    <script type="text/javascript" src="js/main.js"></script>
     @yield('script')
   </body>
 </html>

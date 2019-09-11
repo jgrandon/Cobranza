@@ -53,7 +53,7 @@ $(".btn-cobranza").on('click',function(){
         });
         //agregar medio pago
         $(".btn-mp").click( agregarMedioPago(dtMp) );
-
+        $(".number-only").ForceNumericOnly();
 
 
         $(".panel-accion-cobranza").show(100);

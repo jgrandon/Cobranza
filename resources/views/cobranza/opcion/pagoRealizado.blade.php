@@ -96,7 +96,7 @@
         <div class="form-group col-xs-12">
           <div class="has-feedback">
             <label for="">Monto</label>
-            <input type="number" name="monto" class="form-control has-feedback-left">
+            <input type="number" name="monto" class="form-control has-feedback-left number-only">
             <span class="fa fa-usd form-control-feedback left"></span>
           </div>
         </div>
