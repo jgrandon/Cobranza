@@ -1,5 +1,4 @@
 $(".btn-cobranza").on('click',function(){
-
   var datos = {
     'accion' : $(this).data().accion
     , 'idDeudor' : $("#idDeudor").val()
@@ -48,11 +47,22 @@ $(".btn-cobranza").on('click',function(){
 
         /*  eventos pago-realizado  */
         var dtMp = $("#dt-mp").DataTable({
-          ordering : false
+          language: {
+            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+          }
+          , ordering : false
           , searching : false
+          , columnDefs : [
+            { target : [4], visible: false,
+                searchable: false }
+          ]
         });
         //agregar medio pago
-        $(".btn-mp").click( agregarMedioPago(dtMp) );
+        $(".btn-add-mp").click(function(){
+          if(agregarMedioPago(dtMp)){
+            $("#md-add-mp").modal("toggle");
+          };
+        });
         $(".number-only").ForceNumericOnly();
 
 
@@ -92,19 +102,44 @@ $(".btn-cobranza").on('click',function(){
 });
 
 function agregarMedioPago(tabla){
+  let fecha = $(".fecha-mp").val();
+  let idMedioPago = $(".select-mp").val();
+  let medioPago = $(".select-mp option:selected").text();
+  let monto = parseFloat($(".monto-mp").val());
+
+  //validaciones
+  if( fecha=="" ){
+    alert("Debe indicar una fecha.");
+    return false;
+  }
+  console.log(monto);
+  if( !(monto>0) ){
+    alert("El monto debe ser mayor a cero");
+    return false;
+  }
+
   // if( tabla==null ) return false;
-  // console.log(tabla);
-  return false;
-  tabla.row().add([
-    "<a  class=\"btn-x-mp btn btn-sm btn-danger\"><i class=\"glyphicon glyphicon-remove\"><i></a>"
-    ,
-  ]);
+  console.log($(".select-mp").text());
+  console.log(monto);
+  // return false;
+  tabla.row.add([
+    "<span title=\"Clic para Eliminar\" class=\"glyphicon glyphicon-remove btn-x-mp glyphicon-danger\"></span>"
+    ,fecha
+    ,medioPago
+    ,"$" + number_format(monto, 2, ',', '.')
+    ,idMedioPago
+  ]).draw(false);
 
   //eliminar medio pago
   $(".btn-x-mp").unbind().click(function(){
     tabla.row( $(this).parents('tr') ).remove( ).draw(false);
   });
 
+  //limpiar campos
+  $(".fecha-mp").val("");
+  $(".select-mp").val("1");
+  $(".monto-mp").val("");
+  return true;
 }
 
 function verOpcionCobranza(accion){

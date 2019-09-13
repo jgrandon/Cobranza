@@ -32,7 +32,7 @@
     <div class="row">
       @component('layout.table')
         @slot('id','dt-mp')
-        @slot('headers',['Fecha','Tipo','Monto'])
+        @slot('headers',['','Fecha','Tipo','Monto',''])
         @slot('body')
       @endcomponent
     </div>
@@ -81,13 +81,13 @@
         <div class="form-group col-xs-12">
           <div class="has-feedback">
             <label for="">Fecha</label>
-            <input name="fechaCompromiso" data-toggle="datepicker" class="form-control has-feedback-left">
+            <input data-toggle="datepicker" class="fecha-mp form-control has-feedback-left">
             <span class="fa fa-calendar-o form-control-feedback left"></span>
           </div>
         </div>
-        <div class="form-group col-xs-12">
+        <div class="select-mp form-group col-xs-12">
           <label for="">Medio Pago</label>
-          <select class="form-control " id="select-mp">
+          <select class="form-control ">
             @foreach ($mediosPago as $mp)
               <option value="{{ $mp->id }}">{{ $mp->nombre }}</option>
             @endforeach
@@ -96,17 +96,11 @@
         <div class="form-group col-xs-12">
           <div class="has-feedback">
             <label for="">Monto</label>
-            <input type="number" name="monto" class="form-control has-feedback-left number-only">
+            <input  class="monto-mp form-control has-feedback-left number-only">
             <span class="fa fa-usd form-control-feedback left"></span>
           </div>
         </div>
       @endslot
-
     @endcomponent
-
-
-
-
-
   </div>
 </form>

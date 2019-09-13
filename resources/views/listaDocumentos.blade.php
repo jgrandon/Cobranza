@@ -5,7 +5,7 @@
   @component('layout.table')
     @slot('id','dt-documentos')
     @slot('headers',['Opciones','Estado','Deudor','Documento','Fecha Emision','Fecha Vencimiento','Monto'])
-    @section('body')
+    @slot('body')
       @foreach ($documentos as $c => $d)
         <tr>
           <td>
@@ -23,7 +23,7 @@
           <td>$ {{ number_format($d->monto,0,',','.') }}</td>
         </tr>
       @endforeach
-    @endsection
+    @endslot
   @endcomponent
   <a class="btn btn-success" href="{{ route('agregarDocumento') }}">Agregarrr Documento</a>
 <!--
